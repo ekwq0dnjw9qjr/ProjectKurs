@@ -1,7 +1,7 @@
 package ru.edu.penzgtu.controller;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.validation.annotation.Validated;
@@ -27,49 +27,36 @@ public class ArtistController {
     @Operation(
             summary = "Получение всех художников", description = "Позволяет выгрузить всех художников из БД"
     )
-
     @GetMapping
     public ResponseWrapper<List<ArtistDto>> findAll(){
         return baseResponseService.wrapSuccessResponse(artistService.findAllArtist());
     }
-
     @Operation(
-            summary = "Получение художника по ID", description = "Позволяет выгрузить одного художника по ID из БД"
-    )
-
+            summary = "Получение художника по ID", description = "Позволяет выгрузить одного художника по ID из БД")
     @GetMapping("/artist/{id}")
-    public ResponseWrapper<ArtistDto> getById(@PathVariable @Min(0) Long id) throws PenzGtuException {
+    public ResponseWrapper<ArtistDto> getById(@PathVariable @Min(0) Long id)  {
         return baseResponseService.wrapSuccessResponse(artistService.findArtistById(id));
     }
-
     @Operation(
-            summary = "Создать художника", description = "Позволяет создать новую запись о художнике в БД"
-    )
-
+            summary = "Создать художника", description = "Позволяет создать новую запись о художнике в БД")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createArtist(@RequestBody @Valid ArtistDto artist){
         artistService.saveArtist(artist);
     }
-
     @Operation(
-            summary = "Обновить данные о художнике", description = "Позволяет обновить информацию о художнике в БД"
-    )
-
+            summary = "Обновить данные о художнике", description = "Позволяет обновить информацию о художнике в БД")
+    @Transactional
     @PutMapping("/artist/")
     public void updateArtist(@RequestBody  @Valid ArtistDto artist) {
         artistService.updateArtist(artist);
     }
-
     @Operation(
             summary = "Удалить художника по ID", description = "Позволяеть удалить художника по ID из БД"
     )
-
     @DeleteMapping("/artist/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteArtist(@PathVariable @Min(0) Long id) {
         artistService.deleteArtistById(id);
     }
-
-
- }
+}

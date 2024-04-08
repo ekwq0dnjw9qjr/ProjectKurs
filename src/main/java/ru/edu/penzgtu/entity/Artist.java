@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,12 +19,16 @@ public class Artist {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
+
     @Column(name = "name")
     private String name;
-    @ManyToMany
-    @JoinTable(name = "artists_pictures",
-            joinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id"))
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "artist_pictures",
+            joinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id"))
+
+
     private List<Picture> pictures;
 
 }

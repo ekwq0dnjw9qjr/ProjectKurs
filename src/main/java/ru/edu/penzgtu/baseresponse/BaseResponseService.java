@@ -7,7 +7,6 @@ import ru.edu.penzgtu.exception.PenzGtuException;
 @Service
 @Builder
 public class BaseResponseService {
-
     public <T> ResponseWrapper<T> wrapSuccessResponse(T body) {
         return ResponseWrapper
                 .<T>builder()
@@ -15,14 +14,12 @@ public class BaseResponseService {
                 .body(body)
                 .build();
     }
-
     public ResponseWrapper<?> wrapErrorResponse(PenzGtuException exception) {
         ErrorDto error = ErrorDto.builder()
                 .code(exception.getType().name())
                 .title(exception.getType().getTitle())
                 .text(exception.getType().getText())
                 .build();
-
         return ResponseWrapper
                 .builder()
                 .success(false)

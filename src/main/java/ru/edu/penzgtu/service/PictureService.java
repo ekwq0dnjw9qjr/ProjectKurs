@@ -21,27 +21,21 @@ public class PictureService {
         return pictureMapper.toListDto(pictureRepository.findAll());
     }
 
-    public PictureDto findPictureById(Long id ) throws  PenzGtuException{
+    public PictureDto findPictureById(Long id ) {
         Picture picture = pictureRepository.findById(id)
                 .orElseThrow(() -> new PenzGtuException(ErrorType.NOT_FOUND,"Картина с id " + id + " не найдена"));
         return pictureMapper.toDto(picture);
     }
-
     public void  savePicture(PictureDto pictureDto){
         Picture picture = pictureMapper.toEntity(pictureDto);
         pictureRepository.save(picture);
     }
-
     public void updatePicture(PictureDto newPicture) {
         Picture oldPicture = pictureRepository.findById(newPicture.getId())
-                .orElseThrow(() -> new RuntimeException("Picture not found with id: "));
-
-
+                .orElseThrow(() -> new PenzGtuException(ErrorType.NOT_FOUND,"Картина не найдена " ));
         oldPicture.setName(newPicture.getName());
-
         pictureRepository.save(oldPicture);
     }
-
     public void deletePictureById(Long id ){
         pictureRepository.deleteById(id);
     }

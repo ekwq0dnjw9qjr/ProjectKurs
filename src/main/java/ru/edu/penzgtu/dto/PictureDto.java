@@ -22,7 +22,11 @@ public class PictureDto {
     @Schema(description = "Название картины", example = "Скорбь")
     private String name;
 
-    @JsonProperty("artists")
-    @Schema(description = "Имя художников картины")
-    private List<String> artists;
+    @JsonProperty("artist")
+    @Schema(description = "Имя художника картины")
+    private String artistName;
+
+    @JsonProperty("gallery")
+    @Schema(description = "Галерея где находиться картина")
+    private String galleryName;
 }

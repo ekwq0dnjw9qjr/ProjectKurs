@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.webjars.NotFoundException;
 import ru.edu.penzgtu.baseresponse.BaseResponseService;
 import ru.edu.penzgtu.baseresponse.ResponseWrapper;
 
@@ -38,10 +36,5 @@ public class ExceptionApiHandler {
         log.error("Got validation exception {}, message: {}", e.getClass(), e.getMessage());
 
         return baseResponseService.wrapErrorResponse(new PenzGtuException(ErrorType.CLIENT_ERROR, e));
-
-
-
-
-
     }
 }
