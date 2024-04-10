@@ -1,12 +1,14 @@
 package ru.edu.penzgtu.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
-
+import java.util.List;
 
 
 @Getter
@@ -28,14 +30,18 @@ public class Picture {
     @JoinTable(name = "artist_pictures",
             joinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"))
+    @JsonIgnoreProperties("pictures")
     private Artist artist;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinTable(name = "gallery_pictures",
             joinColumns = @JoinColumn(name = "galleries_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))
-
     private Gallery gallery;
+
+    @ManyToMany(mappedBy = "pictures",cascade = CascadeType.REFRESH)
+    private List<Critic> critics;
+
 
 
 

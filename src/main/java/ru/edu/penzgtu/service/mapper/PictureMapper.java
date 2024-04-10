@@ -6,15 +6,19 @@ import ru.edu.penzgtu.dto.PictureDto;
 import ru.edu.penzgtu.entity.Artist;
 import ru.edu.penzgtu.entity.Picture;
 import ru.edu.penzgtu.repo.ArtistRepository;
+import ru.edu.penzgtu.repo.CriticRepository;
 import ru.edu.penzgtu.repo.GalleryRepository;
+import ru.edu.penzgtu.entity.Critic;
 
 
+import java.util.Collections;
 import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class PictureMapper {
     private final ArtistRepository artistRepository;
     private final GalleryRepository galleryRepository;
+    private final CriticRepository criticRepository;
 
     public List<PictureDto> toListDto(List<Picture> pictures) {
         return pictures.stream().map(this::toDto).toList();
@@ -26,6 +30,8 @@ public class PictureMapper {
                 .name(picture.getName())
                 .artistName(picture.getArtist().getName())
                 .galleryName(picture.getGallery().getName())
+                .critics(picture.getCritics().stream()
+                         .map(Critic :: getName).toList())
                 .build();
     }
 
@@ -36,8 +42,7 @@ public class PictureMapper {
         picture.setName(pictureDto.getName());
         picture.setArtist(artistRepository.findByName(pictureDto.getArtistName()));
         picture.setGallery(galleryRepository.findByName(pictureDto.getGalleryName()));
-        // Необходимо также установить связь с художником, если у вас есть информация о художнике в DTO
-        // Это можно сделать, если вы получаете художника из базы данных или как-то иначе
+
 
         return picture;
     }

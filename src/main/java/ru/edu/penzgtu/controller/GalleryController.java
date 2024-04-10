@@ -38,21 +38,28 @@ public class GalleryController {
     public ResponseWrapper<List<GalleryDto>> findAll(){
         return baseResponseService.wrapSuccessResponse(galleryService.findAllGalleries());
     }
+
+
     @Operation(
-            summary = "Получение галереи по ID", description = "Позволяет выгрузить одну галерею по ID из БД")
+            summary = "Получение галереи по ID", description = "Позволяет выгрузить одну галерею по ID из БД"
+    )
     @GetMapping("/gallery/{id}")
     public ResponseWrapper<GalleryDto> getById(@PathVariable @Min(0) Long id)  {
         return baseResponseService.wrapSuccessResponse(galleryService.findById(id));
     }
+
+
     @Operation(
-            summary = "Создать галерею", description = "Позволяет создать новую запись о галереи в БД")
+            summary = "Создать галерею", description = "Позволяет создать новую запись о галереи в БД"
+    )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createGallery(@RequestBody @Valid GalleryDto gallery){
         galleryService.saveGallery(gallery);
     }
     @Operation(
-            summary = "Обновить данные о галиреи", description = "Позволяет обновить информацию о галереи в БД")
+            summary = "Обновить данные о галиреи", description = "Позволяет обновить информацию о галереи в БД"
+    )
     @Transactional
     @PutMapping("/gallery/")
     public void updateGallery(@RequestBody  @Valid GalleryDto gallery, PictureDto picture) {
@@ -60,6 +67,8 @@ public class GalleryController {
         galleryService.updateGallery(gallery);
         pictureService.updatePicture(picture);
     }
+
+
     @Operation(
             summary = "Удалить галерею по ID", description = "Позволяет удалить галереи по ID из БД"
     )

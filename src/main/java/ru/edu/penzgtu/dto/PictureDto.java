@@ -29,4 +29,9 @@ public class PictureDto {
     @JsonProperty("gallery")
     @Schema(description = "Галерея где находиться картина")
     private String galleryName;
+
+    @JsonProperty("critics")
+    @Schema(description = "Критики которые оценивают картины")
+    private List<String> critics;
+
 }

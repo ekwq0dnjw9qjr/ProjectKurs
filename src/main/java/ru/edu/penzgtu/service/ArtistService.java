@@ -1,7 +1,6 @@
 package ru.edu.penzgtu.service;
 
 import jakarta.transaction.Transactional;
-import ru.edu.penzgtu.service.mapper.ArtistMapper;
 import ru.edu.penzgtu.dto.ArtistDto;
 import ru.edu.penzgtu.entity.Artist;
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import ru.edu.penzgtu.exception.ErrorType;
 import ru.edu.penzgtu.exception.PenzGtuException;
 import ru.edu.penzgtu.repo.ArtistRepository;
 import lombok.RequiredArgsConstructor;
+import ru.edu.penzgtu.service.mapper.ArtistMapper;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class ArtistService {
     private final ArtistRepository artistRepository;
     private final ArtistMapper artistMapper;
-
+    @Transactional
     public List<ArtistDto> findAllArtist(){
         return artistMapper.toListDto(artistRepository.findAll());
     }
@@ -41,4 +41,5 @@ public class ArtistService {
     public void deleteArtistById(Long id ) {
         artistRepository.deleteById(id);
     }
+
 }

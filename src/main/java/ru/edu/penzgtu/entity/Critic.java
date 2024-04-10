@@ -1,22 +1,21 @@
 package ru.edu.penzgtu.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "artists")
-public class Artist {
+@Table(name = "critics")
+public class Critic {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -26,17 +25,13 @@ public class Artist {
     @NotBlank
     private String name;
 
-    @Column(name = "country")
+    @Column(name = "specialization")
     @NotBlank
-    private String country;
+    private String specialization;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "artist_pictures",
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "critics_pictures",
             joinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id"))
-    @JsonIgnoreProperties({"artist","id","critics","gallery"})
-
-
+            inverseJoinColumns = @JoinColumn(name = "critics_id",referencedColumnName = "id"))
     private List<Picture> pictures;
-
 }

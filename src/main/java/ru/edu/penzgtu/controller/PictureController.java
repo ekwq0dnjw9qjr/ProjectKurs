@@ -28,12 +28,16 @@ public class PictureController {
     public ResponseWrapper<List<PictureDto>> findAllPicture() {
         return baseResponseService.wrapSuccessResponse(pictureService.findAllPicture());
     }
+
+
     @Operation(
             summary = "Получение картины по ID", description = "Позволяет выгрузить одну картину по ID из БД")
     @GetMapping("/picture/{id}")
     public ResponseWrapper<PictureDto> getPictureById(@PathVariable @Min(0) Long id)  {
         return baseResponseService.wrapSuccessResponse(pictureService.findPictureById(id));
     }
+
+
     @Operation(
             summary = "Создать картину", description = "Позволяет создать новую запись о картине  в БД"
     )
@@ -42,12 +46,15 @@ public class PictureController {
     public void  createPicture(@RequestBody @Valid PictureDto picture) {
         pictureService.savePicture(picture);
     }
+
+
     @Operation(
             summary = "Обновить данные о картине ", description = "Позволяет обновить информацию о картине в БД")
     @PutMapping("/picture/")
     public void updatePicture( @RequestBody @Valid PictureDto picture ) {
         pictureService.updatePicture(picture);
     }
+
 
     @Operation(
             summary = "Удалить картину по ID ", description = "Позволяет удалить картину по ID из БД")
