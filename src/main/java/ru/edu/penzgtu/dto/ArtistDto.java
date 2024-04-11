@@ -41,7 +41,7 @@ public class ArtistDto {
     private String quote;
 
     @JsonProperty("dateAndTime")
-    @Schema(description = "Дата и время создания художника в БД")
+    @Schema(description = "Дата и время добавления художника в БД")
     private LocalDateTime localDateTime;
 
     @JsonProperty("pictures")

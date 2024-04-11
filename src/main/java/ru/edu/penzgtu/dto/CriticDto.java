@@ -40,7 +40,7 @@ public class CriticDto {
 
     @JsonProperty("dateAndTime")
     @NotBlank
-    @Schema(description = "Дата и время создания критика в БД")
+    @Schema(description = "Дата и время добавления критика в БД")
     private LocalDateTime localDateTime;
 
 

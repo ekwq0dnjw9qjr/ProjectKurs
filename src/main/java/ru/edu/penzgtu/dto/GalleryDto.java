@@ -42,7 +42,7 @@ public class GalleryDto {
     private String street;
 
     @JsonProperty("dateAndTime")
-    @Schema(description = "Дата и время создания галери в БД")
+    @Schema(description = "Дата и время добавления галери в БД")
     @NotBlank
     private LocalDateTime localDateTime;
 

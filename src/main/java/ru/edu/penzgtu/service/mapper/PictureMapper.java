@@ -28,6 +28,10 @@ public class PictureMapper {
        return PictureDto.builder()
                 .id(picture.getId())
                 .name(picture.getName())
+                .genre(picture.getGenre())
+                .technique(picture.getTechnique())
+                .price(picture.getPrice())
+                .localDateTime(picture.getLocalDateTime())
                 .artistName(picture.getArtist().getName())
                 .galleryName(picture.getGallery().getName())
                 .criticName(picture.getCritic().getName())
@@ -39,6 +43,10 @@ public class PictureMapper {
 
         picture.setId(pictureDto.getId());
         picture.setName(pictureDto.getName());
+        picture.setGenre(pictureDto.getGenre());
+        picture.setTechnique(pictureDto.getTechnique());
+        picture.setPrice(pictureDto.getPrice());
+        picture.setLocalDateTime(pictureDto.getLocalDateTime());
         picture.setArtist(artistRepository.findByName(pictureDto.getArtistName()));
         picture.setGallery(galleryRepository.findByName(pictureDto.getGalleryName()));
         picture.setCritic(criticRepository.findByName(pictureDto.getCriticName()));

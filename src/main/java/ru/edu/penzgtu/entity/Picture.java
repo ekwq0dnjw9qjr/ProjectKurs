@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -25,6 +26,20 @@ public class Picture {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "genre")
+    private String genre;
+
+    @Column(name = "technique")
+    private String technique;
+
+    @Column(name = "price")
+    private Long price;
+
+    @Column(name = "dateAndTime")
+    private LocalDateTime localDateTime;
+
+
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinTable(name = "artist_pictures",

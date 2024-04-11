@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import ru.edu.penzgtu.baseresponse.BaseResponseService;
 import ru.edu.penzgtu.baseresponse.ResponseWrapper;
+import ru.edu.penzgtu.dto.GalleryDto;
 import ru.edu.penzgtu.dto.PictureDto;
 import org.springframework.web.bind.annotation.*;
 import ru.edu.penzgtu.service.PictureService;
@@ -36,6 +37,24 @@ public class PictureController {
     public ResponseWrapper<PictureDto> getPictureById(@PathVariable @Min(0) Long id)  {
         return baseResponseService.wrapSuccessResponse(pictureService.findPictureById(id));
     }
+
+    @Operation(
+            summary = "Получение картины по названию", description = "Позволяет найти картину по названию в БД"
+    )
+    @GetMapping("/picture/byName")
+    public ResponseWrapper<List<PictureDto>> getByName(@RequestParam String name) {
+        return baseResponseService.wrapSuccessResponse(pictureService.findPictureByName(name));
+    }
+
+    @Operation(
+            summary = "Получение картины по жанру", description = "Позволяет найти картину по жанру в БД"
+    )
+    @GetMapping("/picture/byGenre")
+    public ResponseWrapper<List<PictureDto>> getByGenre(String genre) {
+        return baseResponseService.wrapSuccessResponse(pictureService.findPictureByGenre(genre));
+    }
+
+
 
 
     @Operation(
