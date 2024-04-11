@@ -39,8 +39,11 @@ public class Picture {
             inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))
     private Gallery gallery;
 
-    @ManyToMany(mappedBy = "pictures",cascade = CascadeType.REFRESH)
-    private List<Critic> critics;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinTable(name = "critic_pictures",
+            joinColumns = @JoinColumn(name = "critic_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"))
+    private Critic critic;
 
 
 

@@ -26,6 +26,10 @@ public class GalleryMapper {
         return GalleryDto.builder()
                 .id(gallery.getId())
                 .name(gallery.getName())
+                .country(gallery.getCountry())
+                .city(gallery.getCity())
+                .street(gallery.getStreet())
+                .localDateTime(gallery.getLocalDateTime())
                 .pictures(gallery.getPictures().stream()
                         .map(Picture::getName)
                         .toList())
@@ -37,6 +41,10 @@ public class GalleryMapper {
 
         gallery.setId(galleryDto.getId());
         gallery.setName(galleryDto.getName());
+        gallery.setCountry(galleryDto.getCountry());
+        gallery.setCity(galleryDto.getCity());
+        gallery.setStreet(galleryDto.getStreet());
+        gallery.setLocalDateTime(galleryDto.getLocalDateTime());
         gallery.setPictures((Collections.singletonList(pictureRepository.findByName(String.valueOf(galleryDto.getPictures().stream().toList())))));
 
         return gallery;

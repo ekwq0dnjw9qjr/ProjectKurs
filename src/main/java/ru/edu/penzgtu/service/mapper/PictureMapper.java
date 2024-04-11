@@ -30,8 +30,7 @@ public class PictureMapper {
                 .name(picture.getName())
                 .artistName(picture.getArtist().getName())
                 .galleryName(picture.getGallery().getName())
-                .critics(picture.getCritics().stream()
-                         .map(Critic :: getName).toList())
+                .criticName(picture.getCritic().getName())
                 .build();
     }
 
@@ -42,6 +41,7 @@ public class PictureMapper {
         picture.setName(pictureDto.getName());
         picture.setArtist(artistRepository.findByName(pictureDto.getArtistName()));
         picture.setGallery(galleryRepository.findByName(pictureDto.getGalleryName()));
+        picture.setCritic(criticRepository.findByName(pictureDto.getCriticName()));
 
 
         return picture;

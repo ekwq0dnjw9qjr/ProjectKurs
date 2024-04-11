@@ -7,6 +7,7 @@ package ru.edu.penzgtu.service.mapper;
  import ru.edu.penzgtu.entity.Picture;
  import ru.edu.penzgtu.repo.PictureRepository;
 
+ import java.time.ZoneId;
  import java.util.Collections;
  import java.util.List;
 
@@ -25,20 +26,27 @@ package ru.edu.penzgtu.service.mapper;
             .id(artist.getId())
             .name(artist.getName())
             .country(artist.getCountry())
+            .style(artist.getStyle())
+            .quote(artist.getQuote())
+            .localDateTime(artist.getLocalDateTime())
+            //.zoneId(artist.getZoneId().getId())
         .pictures(artist.getPictures().stream()
         .map(Picture::getName)
         .toList())
             .build();
  }
 
- public Artist toEntity(ArtistDto artistDto) {
- Artist artist = new Artist();
+     public Artist toEntity(ArtistDto artistDto) {
+     Artist artist = new Artist();
 
- artist.setId(artistDto.getId());
- artist.setName(artistDto.getName());
- artist.setCountry(artistDto.getCountry());
- artist.setPictures((Collections.singletonList(pictureRepository.findByName(String.valueOf(artistDto.getPictures().stream().toList())))));
+     artist.setId(artistDto.getId());
+     artist.setName(artistDto.getName());
+     artist.setCountry(artistDto.getCountry());
+     artist.setLocalDateTime(artistDto.getLocalDateTime());
+     artist.setStyle(artistDto.getStyle());
+     artist.setQuote(artistDto.getQuote());
+     artist.setPictures((Collections.singletonList(pictureRepository.findByName(String.valueOf(artistDto.getPictures().stream().toList())))));
 
- return artist;
- }
+     return artist;
+  }
  }

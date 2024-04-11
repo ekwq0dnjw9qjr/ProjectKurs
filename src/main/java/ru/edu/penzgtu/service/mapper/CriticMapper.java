@@ -26,6 +26,9 @@ public class CriticMapper {
                 .id(critic.getId())
                 .name(critic.getName())
                 .specialization(critic.getSpecialization())
+                .age(critic.getAge())
+                .region(critic.getRegion())
+                .localDateTime(critic.getLocalDateTime())
                 .pictures(critic.getPictures().stream()
                         .map(Picture::getName)
                         .toList())
@@ -38,6 +41,11 @@ public class CriticMapper {
         critic.setId(criticDto.getId());
         critic.setName(criticDto.getName());
         critic.setSpecialization(criticDto.getSpecialization());
+        critic.setAge(criticDto.getAge());
+        critic.setRegion(criticDto.getRegion());
+        critic.setLocalDateTime(criticDto.getLocalDateTime());
+        critic.setPictures((Collections.singletonList(pictureRepository.findByName(String.valueOf(criticDto.getPictures().stream().toList())))));
+
 
         return critic;
     }

@@ -9,6 +9,7 @@ import ru.edu.penzgtu.repo.GalleryRepository;
 import ru.edu.penzgtu.service.mapper.GalleryMapper;
 import ru.edu.penzgtu.entity.Gallery;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,8 +29,18 @@ public class GalleryService {
         return galleryMapper.toDto(gallery);
     }
 
+    public List<GalleryDto> findGalleryByName(String name) {
+        List<Gallery> galleries = galleryRepository.findGalleryByName(name);
+        return galleryMapper.toListDto(galleries);
+    }
+
+    public List<GalleryDto> findGalleryByCity(String city) {
+        return galleryRepository.findByCity(city);
+    }
+
     public void  saveGallery (GalleryDto galleryDto) {
         Gallery gallery = galleryMapper.toEntity(galleryDto);
+        gallery.setLocalDateTime(LocalDateTime.now());
         galleryRepository.save(gallery);
     }
 
@@ -37,6 +48,9 @@ public class GalleryService {
         Gallery oldGallery = galleryRepository.findById(newGallery.getId()).
                 orElseThrow(()-> new PenzGtuException(ErrorType.NOT_FOUND,"Галерея не найдена"));
         oldGallery.setName(newGallery.getName());
+        oldGallery.setCountry(newGallery.getCountry());
+        oldGallery.setCity(newGallery.getCity());
+        oldGallery.setStreet(newGallery.getStreet());
         galleryRepository.save(oldGallery);
     }
 

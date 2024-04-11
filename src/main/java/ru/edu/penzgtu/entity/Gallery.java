@@ -2,6 +2,8 @@ package ru.edu.penzgtu.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,6 +20,18 @@ public class Gallery {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "dateAndTime")
+    private LocalDateTime localDateTime;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "gallery_pictures",

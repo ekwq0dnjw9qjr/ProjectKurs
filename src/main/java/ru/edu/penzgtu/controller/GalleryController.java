@@ -44,8 +44,24 @@ public class GalleryController {
             summary = "Получение галереи по ID", description = "Позволяет выгрузить одну галерею по ID из БД"
     )
     @GetMapping("/gallery/{id}")
-    public ResponseWrapper<GalleryDto> getById(@PathVariable @Min(0) Long id)  {
+    public ResponseWrapper<GalleryDto> getById(@PathVariable @Min(0) Long id) {
         return baseResponseService.wrapSuccessResponse(galleryService.findById(id));
+    }
+
+    @Operation(
+            summary = "Получение галереи по названию", description = "Позволяет найти галерею по названию из БД"
+    )
+    @GetMapping("/gallery/byName")
+    public ResponseWrapper<List<GalleryDto>> getByName(@RequestParam String name) {
+        return baseResponseService.wrapSuccessResponse(galleryService.findGalleryByName(name));
+    }
+
+    @Operation(
+            summary = "Получение галереи по городу", description = "Позволяет найти галерею по городу в БД"
+    )
+    @GetMapping("/gallery/byCity")
+    public ResponseWrapper<List<GalleryDto>> getByCity(String city) {
+        return baseResponseService.wrapSuccessResponse(galleryService.findGalleryByCity(city));
     }
 
 
@@ -62,10 +78,9 @@ public class GalleryController {
     )
     @Transactional
     @PutMapping("/gallery/")
-    public void updateGallery(@RequestBody  @Valid GalleryDto gallery, PictureDto picture) {
+    public void updateGallery(@RequestBody  @Valid GalleryDto gallery) {
 
         galleryService.updateGallery(gallery);
-        pictureService.updatePicture(picture);
     }
 
 

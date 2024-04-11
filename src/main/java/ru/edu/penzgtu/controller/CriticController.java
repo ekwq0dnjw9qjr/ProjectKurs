@@ -32,7 +32,8 @@ public class CriticController {
     private final PictureService pictureService;
 
     @Operation(
-            summary = "Получение всех критиков", description = "Позволяет выгрузить всех критиков из БД")
+            summary = "Получение всех критиков", description = "Позволяет выгрузить всех критиков из БД"
+    )
 
     @GetMapping
     public ResponseWrapper<List<CriticDto>> findAll(){
@@ -45,6 +46,22 @@ public class CriticController {
     @GetMapping("/critic/{id}")
     public ResponseWrapper<CriticDto> getById(@PathVariable @Min(0) Long id)  {
         return baseResponseService.wrapSuccessResponse(criticService.findCriticById(id));
+    }
+
+    @Operation(
+            summary = "Найти критика по имени",description = "Позволяет найти критика по имени в БД"
+    )
+    @GetMapping("/critic/byName")
+    public ResponseWrapper<List<CriticDto>> getByName(@RequestParam String name) {
+        return baseResponseService.wrapSuccessResponse(criticService.findCriticByName(name));
+    }
+
+    @Operation(
+            summary = "Найти критика по региону", description = "Позволяет найти критика по региону в БД"
+    )
+    @GetMapping("/critic/byRegion")
+    public ResponseWrapper<List<CriticDto>> getByRegion(String region) {
+        return baseResponseService.wrapSuccessResponse(criticService.findCriticByRegion(region));
     }
 
     @Operation(
@@ -62,9 +79,8 @@ public class CriticController {
     )
     @Transactional
     @PutMapping("/critic/")
-    public void updateCritic(@RequestBody  @Valid CriticDto critic, PictureDto picture) {
+    public void updateCritic(@RequestBody  @Valid CriticDto critic) {
         criticService.updateCritic(critic);
-        pictureService.updatePicture(picture);
     }
 
     @Operation(

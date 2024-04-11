@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -29,9 +30,18 @@ public class Critic {
     @NotBlank
     private String specialization;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "critics_pictures",
+    @Column(name = "region")
+    private String region;
+
+    @Column(name = "age")
+    private Long age;
+
+    @Column(name = "dateAndTime")
+    private LocalDateTime localDateTime;
+
+    @OneToMany
+    @JoinTable(name = "critic_pictures",
             joinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "critics_id",referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "critic_id",referencedColumnName = "id"))
     private List<Picture> pictures;
 }
