@@ -27,21 +27,19 @@ public class Artist {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    @NotBlank
+    @Column(name = "name",nullable = false,length = 155)
     private String name;
 
-    @Column(name = "country")
-    @NotBlank
+    @Column(name = "country",nullable = false,length = 155)
     private String country;
 
-    @Column(name = "dateAndTime")
+    @Column(name = "dateAndTime",nullable = false)
     private LocalDateTime localDateTime;
 
-    @Column(name = "style")
+    @Column(name = "style",nullable = false,length = 155)
     private String style;
 
-    @Column(name = "quote")
+    @Column(name = "quote",nullable = false,length = 444)
     private String quote;
 
 

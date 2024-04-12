@@ -29,7 +29,6 @@ package ru.edu.penzgtu.service.mapper;
             .style(artist.getStyle())
             .quote(artist.getQuote())
             .localDateTime(artist.getLocalDateTime())
-            //.zoneId(artist.getZoneId().getId())
         .pictures(artist.getPictures().stream()
         .map(Picture::getName)
         .toList())

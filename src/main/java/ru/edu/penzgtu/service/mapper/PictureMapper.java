@@ -25,16 +25,22 @@ public class PictureMapper {
     }
 
     public PictureDto toDto(Picture picture) {
-       return PictureDto.builder()
+        String artistName = picture.getArtist() != null ? picture.getArtist().getName() : null;
+        String galleryName = picture.getGallery() != null ? picture.getGallery().getName() : null;
+        String criticName = picture.getCritic() != null ? picture.getCritic().getName() : null;
+
+
+
+        return PictureDto.builder()
                 .id(picture.getId())
                 .name(picture.getName())
                 .genre(picture.getGenre())
                 .technique(picture.getTechnique())
                 .price(picture.getPrice())
                 .localDateTime(picture.getLocalDateTime())
-                .artistName(picture.getArtist().getName())
-                .galleryName(picture.getGallery().getName())
-                .criticName(picture.getCritic().getName())
+                .artistName(artistName)
+                .galleryName(galleryName)
+                .criticName(criticName)
                 .build();
     }
 
