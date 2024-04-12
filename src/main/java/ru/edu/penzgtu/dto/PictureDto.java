@@ -3,9 +3,10 @@ package ru.edu.penzgtu.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "Информация о картине")
 public class PictureDto {
 
@@ -22,28 +24,34 @@ public class PictureDto {
 
     @JsonProperty("name")
     @NotBlank
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я\\s]+$",
+            message = "Название картины может содержать только буквы")
     @Schema(description = "Название картины", example = "Скорбь")
     private String name;
 
 
     @JsonProperty("genre")
     @NotBlank
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я\\s]+$",
+            message = "Жанр в котором выполнена картина может содержать только буквы")
     @Schema(description = "Жанр картины", example = "Пейзаж")
     private String genre;
 
     @JsonProperty("technique")
     @NotBlank
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$",
+            message = "Техника в которой выполнена картина может содержать только буквы")
     @Schema(description = "Техника в которой выполнена картина", example = "Живопись")
     private String technique;
 
     @JsonProperty("price")
-    @NotBlank
+    @Positive(message = "Возраст должен быть положительным числом")
     @Schema(description = "Цена картины", example = "200")
     private Long price;
 
     @JsonProperty("dateAndTime")
-    @NotBlank
     @Schema(description = "Дата и время добавления  картины в БД")
+    @NotNull(message = "Дата и время не должны быть пустыми")
     private LocalDateTime localDateTime;
 
 
@@ -52,7 +60,7 @@ public class PictureDto {
     private String artistName;
 
     @JsonProperty("gallery")
-    @Schema(description = "Галерея где находиться картина",example = "Музей Ван Гога")
+    @Schema(description = "Галерея где находится картина",example = "Музей Ван Гога")
     private String galleryName;
 
     @JsonProperty("critic")
@@ -61,9 +69,7 @@ public class PictureDto {
 
 
 
-    public PictureDto() {
 
-    }
     public  PictureDto(Long id, String name, String technique, String genre,
                        Long price, LocalDateTime localDateTime) {
         this.id = id;
@@ -73,6 +79,9 @@ public class PictureDto {
         this.price = price;
         this.localDateTime = localDateTime;
     }
+
+
+
 
 
 

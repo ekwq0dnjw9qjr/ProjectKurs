@@ -3,12 +3,11 @@ package ru.edu.penzgtu.service.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.edu.penzgtu.dto.PictureDto;
-import ru.edu.penzgtu.entity.Artist;
 import ru.edu.penzgtu.entity.Picture;
 import ru.edu.penzgtu.repo.ArtistRepository;
 import ru.edu.penzgtu.repo.CriticRepository;
 import ru.edu.penzgtu.repo.GalleryRepository;
-import ru.edu.penzgtu.entity.Critic;
+
 
 
 import java.util.Collections;

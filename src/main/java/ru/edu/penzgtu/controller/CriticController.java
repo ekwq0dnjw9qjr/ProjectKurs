@@ -29,10 +29,10 @@ public class CriticController {
 
     private final CriticService criticService;
     private final BaseResponseService baseResponseService;
-    private final PictureService pictureService;
 
     @Operation(
-            summary = "Получение всех критиков", description = "Позволяет выгрузить всех критиков из БД"
+            summary = "Получение всех критиков",
+            description = "Позволяет выгрузить всех критиков из БД"
     )
 
     @GetMapping
@@ -41,7 +41,8 @@ public class CriticController {
     }
 
     @Operation(
-            summary = "Получение критика по ID", description = "Позволяет выгрузить одного критика по ID из БД"
+            summary = "Получение критика по ID",
+            description = "Позволяет выгрузить одного критика по ID из БД"
     )
     @GetMapping("/critic/{id}")
     public ResponseWrapper<CriticDto> getById(@PathVariable @Min(0) Long id)  {
@@ -49,7 +50,8 @@ public class CriticController {
     }
 
     @Operation(
-            summary = "Найти критика по имени",description = "Позволяет найти критика по имени в БД"
+            summary = "Найти критика по имени",
+            description = "Позволяет найти критика по имени в БД"
     )
     @GetMapping("/critic/byName")
     public ResponseWrapper<List<CriticDto>> getByName(@RequestParam String name) {
@@ -57,15 +59,17 @@ public class CriticController {
     }
 
     @Operation(
-            summary = "Найти критика по региону", description = "Позволяет найти критика по региону в БД"
+            summary = "Найти критика по региону",
+            description = "Позволяет найти критика по региону в БД"
     )
     @GetMapping("/critic/byRegion")
-    public ResponseWrapper<List<CriticDto>> getByRegion(String region) {
+    public ResponseWrapper<List<CriticDto>> getByRegion(@RequestParam String region) {
         return baseResponseService.wrapSuccessResponse(criticService.findCriticByRegion(region));
     }
 
     @Operation(
-            summary = "Создать критика", description = "Позволяет создать новую запись о критике в БД"
+            summary = "Создать критика",
+            description = "Позволяет создать новую запись о критике в БД"
     )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -75,7 +79,8 @@ public class CriticController {
 
 
     @Operation(
-            summary = "Обновить данные о критике", description = "Позволяет обновить информацию о критике в БД"
+            summary = "Обновить данные о критике",
+            description = "Позволяет обновить информацию о критике в БД"
     )
     @Transactional
     @PutMapping("/critic/")
@@ -84,7 +89,8 @@ public class CriticController {
     }
 
     @Operation(
-            summary = "Удалить критика по ID", description = "Позволяет удалить критика по ID из БД"
+            summary = "Удалить критика по ID",
+            description = "Позволяет удалить критика по ID из БД"
     )
     @DeleteMapping("/critic/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

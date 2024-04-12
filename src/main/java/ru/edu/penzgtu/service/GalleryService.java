@@ -1,6 +1,7 @@
 package ru.edu.penzgtu.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.edu.penzgtu.dto.GalleryDto;
 import ru.edu.penzgtu.exception.ErrorType;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class GalleryService {
     private final GalleryRepository galleryRepository;
@@ -20,31 +22,42 @@ public class GalleryService {
 
 
     public List<GalleryDto> findAllGalleries() {
+        log.info("Найдены все существующие галереи в БД");
         return galleryMapper.toListDto(galleryRepository.findAll());
     }
 
-    public GalleryDto findById(Long id) {
+
+    public GalleryDto findGalleryById(Long id) {
+        log.info("Найдена галерея по id: " + id);
         Gallery gallery = galleryRepository.findById(id)
                 .orElseThrow(() -> new PenzGtuException(ErrorType.NOT_FOUND,"Галерея с id " + id + " на найдена"));
         return galleryMapper.toDto(gallery);
     }
 
+
     public List<GalleryDto> findGalleryByName(String name) {
+        log.info("Найдены галереи по имени: " + name);
         List<Gallery> galleries = galleryRepository.findGalleryByName(name);
         return galleryMapper.toListDto(galleries);
     }
 
+
     public List<GalleryDto> findGalleryByCity(String city) {
+        log.info("Найдены галереи по городу: " + city);
         return galleryRepository.findByCity(city);
     }
 
+
     public void  saveGallery (GalleryDto galleryDto) {
+        log.info("Галерея сохранена");
         Gallery gallery = galleryMapper.toEntity(galleryDto);
         gallery.setLocalDateTime(LocalDateTime.now());
         galleryRepository.save(gallery);
     }
 
+
     public void updateGallery (GalleryDto newGallery) {
+        log.info("Данные о галереи были обновлены");
         Gallery oldGallery = galleryRepository.findById(newGallery.getId()).
                 orElseThrow(()-> new PenzGtuException(ErrorType.NOT_FOUND,"Галерея не найдена"));
         oldGallery.setName(newGallery.getName());
@@ -54,7 +67,9 @@ public class GalleryService {
         galleryRepository.save(oldGallery);
     }
 
+
     public void deleteGalleryById (Long id) {
+        log.info("Удалена галерея с id: " + id);
         galleryRepository.deleteById(id);
     }
 }

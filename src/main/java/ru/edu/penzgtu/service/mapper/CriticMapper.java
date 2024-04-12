@@ -44,7 +44,8 @@ public class CriticMapper {
         critic.setAge(criticDto.getAge());
         critic.setRegion(criticDto.getRegion());
         critic.setLocalDateTime(criticDto.getLocalDateTime());
-        critic.setPictures((Collections.singletonList(pictureRepository.findByName(String.valueOf(criticDto.getPictures().stream().toList())))));
+        critic.setPictures((Collections.singletonList
+                (pictureRepository.findByName(String.valueOf(criticDto.getPictures().stream().toList())))));
 
 
         return critic;

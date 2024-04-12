@@ -15,7 +15,9 @@ public interface CriticRepository extends JpaRepository<Critic,Long> {
 
     List<Critic> findCriticByName(String name);
 
-    @Query("SELECT new ru.edu.penzgtu.dto.CriticDto(c.id, c.name, c.region,c.age,c.specialization,c.localDateTime) FROM Critic c WHERE c.region = ?1")
+    @Query("SELECT new ru.edu.penzgtu.dto.CriticDto(c.id, c.name, c.region,c.age,c.specialization,c.localDateTime) " +
+            "FROM Critic c " +
+            "WHERE c.region = ?1")
     List<CriticDto> findByRegion(String region);
 
 }

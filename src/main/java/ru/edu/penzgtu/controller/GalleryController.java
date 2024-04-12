@@ -28,11 +28,11 @@ import java.util.List;
 @Tag(name = "Галереи",description = "Операции над галереями")
 public class GalleryController {
     private final GalleryService galleryService;
-    private final PictureService pictureService;
     private final BaseResponseService baseResponseService;
 
     @Operation(
-            summary = "Получение всех галерей", description = "Позволяет выгрузить все галереи из БД"
+            summary = "Получение всех галерей",
+            description = "Позволяет выгрузить все галереи из БД"
     )
     @GetMapping
     public ResponseWrapper<List<GalleryDto>> findAll(){
@@ -41,15 +41,17 @@ public class GalleryController {
 
 
     @Operation(
-            summary = "Получение галереи по ID", description = "Позволяет выгрузить одну галерею по ID из БД"
+            summary = "Получение галереи по ID",
+            description = "Позволяет выгрузить одну галерею по ID из БД"
     )
     @GetMapping("/gallery/{id}")
     public ResponseWrapper<GalleryDto> getById(@PathVariable @Min(0) Long id) {
-        return baseResponseService.wrapSuccessResponse(galleryService.findById(id));
+        return baseResponseService.wrapSuccessResponse(galleryService.findGalleryById(id));
     }
 
     @Operation(
-            summary = "Получение галереи по названию", description = "Позволяет найти галерею по названию из БД"
+            summary = "Получение галереи по названию",
+            description = "Позволяет найти галерею по названию из БД"
     )
     @GetMapping("/gallery/byName")
     public ResponseWrapper<List<GalleryDto>> getByName(@RequestParam String name) {
@@ -57,16 +59,18 @@ public class GalleryController {
     }
 
     @Operation(
-            summary = "Получение галереи по городу", description = "Позволяет найти галерею по городу в БД"
+            summary = "Получение галереи по городу",
+            description = "Позволяет найти галерею по городу в БД"
     )
     @GetMapping("/gallery/byCity")
-    public ResponseWrapper<List<GalleryDto>> getByCity(String city) {
+    public ResponseWrapper<List<GalleryDto>> getByCity( @RequestParam String city) {
         return baseResponseService.wrapSuccessResponse(galleryService.findGalleryByCity(city));
     }
 
 
     @Operation(
-            summary = "Создать галерею", description = "Позволяет создать новую запись о галереи в БД"
+            summary = "Создать галерею",
+            description = "Позволяет создать новую запись о галереи в БД"
     )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -74,7 +78,8 @@ public class GalleryController {
         galleryService.saveGallery(gallery);
     }
     @Operation(
-            summary = "Обновить данные о галиреи", description = "Позволяет обновить информацию о галереи в БД"
+            summary = "Обновить данные о галиреи",
+            description = "Позволяет обновить информацию о галереи в БД"
     )
     @Transactional
     @PutMapping("/gallery/")
@@ -85,7 +90,8 @@ public class GalleryController {
 
 
     @Operation(
-            summary = "Удалить галерею по ID", description = "Позволяет удалить галереи по ID из БД"
+            summary = "Удалить галерею по ID",
+            description = "Позволяет удалить галереи по ID из БД"
     )
     @DeleteMapping("/gallery/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

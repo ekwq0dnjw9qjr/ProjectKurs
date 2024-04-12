@@ -1,6 +1,8 @@
 package ru.edu.penzgtu.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,28 +20,27 @@ public class Gallery {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false,length = 66)
+    @NotBlank
     private String name;
 
-    @Column(name = "country")
+    @Column(name = "country",nullable = false,length = 66)
+    @NotBlank
     private String country;
 
-    @Column(name = "city")
+    @Column(name = "city",nullable = false,length = 66)
     private String city;
 
-    @Column(name = "street")
+    @Column(name = "street",nullable = false,length = 66)
     private String street;
 
-    @Column(name = "dateAndTime")
+    @Column(name = "date_and_time")
+    @NotNull(message = "Дата и время не должны быть пустыми")
     private LocalDateTime localDateTime;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinTable(name = "gallery_pictures",
             joinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "galleries_id", referencedColumnName = "id"))
     private List<Picture> pictures;
-
-
-
-
 }

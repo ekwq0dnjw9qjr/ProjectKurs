@@ -3,17 +3,14 @@ package ru.edu.penzgtu.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 @Getter
 @Setter
@@ -27,22 +24,21 @@ public class Artist {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name",nullable = false,length = 155)
+    @Column(name = "name",nullable = false,length = 44)
     private String name;
 
-    @Column(name = "country",nullable = false,length = 155)
+    @Column(name = "country",nullable = false,length = 44)
     private String country;
 
-    @Column(name = "dateAndTime",nullable = false)
+    @Column(name = "date_and_time")
+    @NotNull(message = "Дата и время не должны быть пустыми")
     private LocalDateTime localDateTime;
 
     @Column(name = "style",nullable = false,length = 155)
     private String style;
 
-    @Column(name = "quote",nullable = false,length = 444)
+    @Column(name = "quote",nullable = false,length = 4444)
     private String quote;
-
-
 
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -50,7 +46,4 @@ public class Artist {
             joinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id"))
     @JsonIgnoreProperties({"artist","id","critics","gallery","dateAndTime"})
-
-    private List<Picture> pictures = new ArrayList<>();
-
-}
+    private List<Picture> pictures = new ArrayList<>();}

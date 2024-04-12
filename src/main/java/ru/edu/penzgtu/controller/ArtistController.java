@@ -29,7 +29,8 @@ public class ArtistController {
     private final ArtistRepository artistRepository;
 
     @Operation(
-            summary = "Получение всех художников", description = "Позволяет выгрузить всех художников из БД"
+            summary = "Получение всех художников",
+            description = "Позволяет выгрузить всех художников из БД"
     )
     @GetMapping
     public ResponseWrapper<List<ArtistDto>> findAll() {
@@ -38,14 +39,16 @@ public class ArtistController {
 
 
     @Operation(
-            summary = "Получение художника по ID", description = "Позволяет выгрузить одного художника по ID из БД"
+            summary = "Получение художника по ID",
+            description = "Позволяет выгрузить одного художника по ID из БД"
     )
     @GetMapping("/artist/{id}")
     public ResponseWrapper<ArtistDto> getById(@PathVariable @Min(0) Long id) {
         return baseResponseService.wrapSuccessResponse(artistService.findArtistById(id));
     }
     @Operation(
-            summary = "Получение художника по имени", description = "Позволяет выгрузить одного художника по имени из БД"
+            summary = "Получение художника по имени",
+            description = "Позволяет выгрузить одного художника по имени из БД"
     )
     @GetMapping("/artist/byName")
     public ResponseWrapper <List<ArtistDto>> findArtistByName(@RequestParam String name) {
@@ -53,16 +56,18 @@ public class ArtistController {
     }
 
     @Operation(
-            summary = "Получение художника по стране", description = "Позволяет выгрузить одного художника по стране из БД"
+            summary = "Получение художника по стране",
+            description = "Позволяет выгрузить одного художника по стране из БД"
     )
     @GetMapping("/artist/byCountry")
-    public ResponseWrapper<List<ArtistDto>> getArtistByCountry( String country) {
+    public ResponseWrapper<List<ArtistDto>> getArtistByCountry( @RequestParam String country) {
         return baseResponseService.wrapSuccessResponse(artistService.findByCountry(country));
     }
 
 
     @Operation(
-            summary = "Создать художника", description = "Позволяет создать новую запись о художнике в БД"
+            summary = "Создать художника",
+            description = "Позволяет создать новую запись о художнике в БД"
     )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -72,7 +77,8 @@ public class ArtistController {
 
 
     @Operation(
-            summary = "Обновить данные о художнике", description = "Позволяет обновить информацию о художнике в БД"
+            summary = "Обновить данные о художнике",
+            description = "Позволяет обновить информацию о художнике в БД"
     )
     @PutMapping("/artist/")
     public void updateArtist(@RequestBody @Valid ArtistDto artist) {
@@ -81,7 +87,8 @@ public class ArtistController {
 
 
     @Operation(
-            summary = "Удалить художника по ID", description = "Позволяет удалить художника по ID из БД"
+            summary = "Удалить художника по ID",
+            description = "Позволяет удалить художника по ID из БД"
     )
     @DeleteMapping("/artist/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
