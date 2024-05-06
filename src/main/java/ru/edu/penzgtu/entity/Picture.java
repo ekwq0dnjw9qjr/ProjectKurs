@@ -43,22 +43,16 @@ public class Picture {
     @NotNull(message = "Дата и время не должны быть пустыми")
     private LocalDateTime localDateTime;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},optional = false)
-    @JoinTable(name = "artist_pictures",
-            joinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
     @JsonIgnoreProperties("pictures")
     private Artist artist;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},optional = true)
-    @JoinTable(name = "gallery_pictures",
-            joinColumns = @JoinColumn(name = "galleries_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))
+    @ManyToOne
+    @JoinColumn(name = "gallery_id")
     private Gallery gallery;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},optional = true)
-    @JoinTable(name = "critic_pictures",
-            joinColumns = @JoinColumn(name = "critic_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))
+    @ManyToOne
+    @JoinColumn(name = "critic_id")
     private Critic critic;
 }

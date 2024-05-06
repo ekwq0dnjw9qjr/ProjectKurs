@@ -38,9 +38,6 @@ public class Gallery {
     @NotNull(message = "Дата и время не должны быть пустыми")
     private LocalDateTime localDateTime;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinTable(name = "gallery_pictures",
-            joinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "galleries_id", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "gallery",fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, orphanRemoval = true)
     private List<Picture> pictures;
 }

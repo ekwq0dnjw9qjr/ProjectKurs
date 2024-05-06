@@ -41,9 +41,6 @@ public class Artist {
     private String quote;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(name = "artist_pictures",
-            joinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "artist_id",referencedColumnName = "id"))
+    @OneToMany(mappedBy = "artist", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"artist","id","critics","gallery","dateAndTime"})
     private List<Picture> pictures = new ArrayList<>();}

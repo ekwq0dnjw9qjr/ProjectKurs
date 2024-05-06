@@ -9,12 +9,14 @@ import ru.edu.penzgtu.exception.ErrorType;
 import ru.edu.penzgtu.exception.PenzGtuException;
 import ru.edu.penzgtu.repo.ArtistRepository;
 import lombok.RequiredArgsConstructor;
+import ru.edu.penzgtu.repo.PictureRepository;
 import ru.edu.penzgtu.service.mapper.ArtistMapper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,6 +26,7 @@ import java.util.List;
 public class ArtistService {
     private final ArtistRepository artistRepository;
     private final ArtistMapper artistMapper;
+    private final PictureRepository pictureRepository;
     @Transactional
     public List<ArtistDto> findAllArtist(){
         log.info("Найдены все существующие художники в БД");
@@ -56,6 +59,8 @@ public class ArtistService {
         log.info("Художник сохранен");
         Artist artist = artistMapper.toEntity(artistDto);
         artist.setLocalDateTime(LocalDateTime.now());
+        artist.setPictures((Collections.singletonList
+                (pictureRepository.findByName(String.valueOf(artistDto.getPictures().stream().toList())))));
         artistRepository.save(artist);
     }
 

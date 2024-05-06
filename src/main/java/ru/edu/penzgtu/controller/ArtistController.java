@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 public class ArtistController {
     private final ArtistService artistService;
     private final BaseResponseService baseResponseService;
-    private final ArtistRepository artistRepository;
 
     @Operation(
             summary = "Получение всех художников",

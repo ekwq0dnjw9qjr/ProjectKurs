@@ -44,8 +44,6 @@ package ru.edu.penzgtu.service.mapper;
      artist.setLocalDateTime(artistDto.getLocalDateTime());
      artist.setStyle(artistDto.getStyle());
      artist.setQuote(artistDto.getQuote());
-     artist.setPictures((Collections.singletonList
-             (pictureRepository.findByName(String.valueOf(artistDto.getPictures().stream().toList())))));
 
      return artist;
   }

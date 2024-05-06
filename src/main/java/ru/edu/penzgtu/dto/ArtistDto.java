@@ -60,7 +60,7 @@ public class ArtistDto {
     @Size(min = 0,max = 44,
             message = "Количество названий картин должно быть от 0 до 44")
     @Schema(description = "Названия картин художника")
-    private List<String> pictures;
+    private List<String>    pictures;
 
 
 

@@ -43,8 +43,6 @@ public class Critic {
     @NotNull(message = "Дата и время не должны быть пустыми")
     private LocalDateTime localDateTime;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinTable(name = "critic_pictures",
-            joinColumns = @JoinColumn(name = "picture_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "critic_id",referencedColumnName = "id"))
-    private List<Picture> pictures;}
+    @OneToMany(mappedBy = "critic",fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, orphanRemoval = true)
+    private List<Picture> pictures;
+}
