@@ -35,7 +35,7 @@ public class GalleryController {
             description = "Позволяет выгрузить все галереи из БД"
     )
     @GetMapping
-    public ResponseWrapper<List<GalleryDto>> findAll(){
+    public ResponseWrapper<List<GalleryDto>> findAllGalleries(){
         return baseResponseService.wrapSuccessResponse(galleryService.findAllGalleries());
     }
 
@@ -45,7 +45,7 @@ public class GalleryController {
             description = "Позволяет выгрузить одну галерею по ID из БД"
     )
     @GetMapping("/gallery/{id}")
-    public ResponseWrapper<GalleryDto> getById(@PathVariable @Min(0) Long id) {
+    public ResponseWrapper<GalleryDto> getGalleryById(@PathVariable @Min(0) Long id) {
         return baseResponseService.wrapSuccessResponse(galleryService.findGalleryById(id));
     }
 
@@ -54,18 +54,10 @@ public class GalleryController {
             description = "Позволяет найти галерею по названию из БД"
     )
     @GetMapping("/gallery/byName")
-    public ResponseWrapper<List<GalleryDto>> getByName(@RequestParam String name) {
+    public ResponseWrapper<List<GalleryDto>> getGalleryByName(@RequestParam String name) {
         return baseResponseService.wrapSuccessResponse(galleryService.findGalleryByName(name));
     }
 
-    @Operation(
-            summary = "Получение галереи по городу",
-            description = "Позволяет найти галерею по городу в БД"
-    )
-    @GetMapping("/gallery/byCity")
-    public ResponseWrapper<List<GalleryDto>> getByCity( @RequestParam String city) {
-        return baseResponseService.wrapSuccessResponse(galleryService.findGalleryByCity(city));
-    }
 
 
     @Operation(

@@ -52,9 +52,6 @@ public class PictureMapper {
         picture.setTechnique(pictureDto.getTechnique());
         picture.setPrice(pictureDto.getPrice());
         picture.setLocalDateTime(pictureDto.getLocalDateTime());
-        picture.setArtist(artistRepository.findByName(pictureDto.getArtistName()));
-        picture.setGallery(galleryRepository.findByName(pictureDto.getGalleryName()));
-        picture.setCritic(criticRepository.findByName(pictureDto.getCriticName()));
 
 
         return picture;

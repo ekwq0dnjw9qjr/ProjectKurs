@@ -45,8 +45,6 @@ public class GalleryMapper {
         gallery.setCity(galleryDto.getCity());
         gallery.setStreet(galleryDto.getStreet());
         gallery.setLocalDateTime(galleryDto.getLocalDateTime());
-        gallery.setPictures((Collections.singletonList
-                (pictureRepository.findByName(String.valueOf(galleryDto.getPictures().stream().toList())))));
 
         return gallery;
     }

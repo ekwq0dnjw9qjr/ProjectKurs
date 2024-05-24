@@ -27,7 +27,6 @@ public class ArtistService {
     private final ArtistRepository artistRepository;
     private final ArtistMapper artistMapper;
     private final PictureRepository pictureRepository;
-    @Transactional
     public List<ArtistDto> findAllArtist(){
         log.info("Найдены все существующие художники в БД");
         return artistMapper.toListDto(artistRepository.findAll());
@@ -49,10 +48,7 @@ public class ArtistService {
     }
 
 
-    public List<ArtistDto> findByCountry(String country) {
-        log.info("Найдены художники по стране: " + country);
-        return artistRepository.findByCountry(country);
-    }
+
 
 
     public void saveArtist(ArtistDto artistDto){

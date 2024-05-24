@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import ru.edu.penzgtu.exception.ErrorType;
 import ru.edu.penzgtu.exception.PenzGtuException;
+import ru.edu.penzgtu.repo.ArtistRepository;
+import ru.edu.penzgtu.repo.CriticRepository;
+import ru.edu.penzgtu.repo.GalleryRepository;
 import ru.edu.penzgtu.repo.PictureRepository;
 import ru.edu.penzgtu.service.mapper.PictureMapper;
 
@@ -22,6 +25,9 @@ import java.util.List;
 public class PictureService {
     private final PictureRepository pictureRepository;
     private final PictureMapper pictureMapper;
+    private final ArtistRepository artistRepository;
+    private final CriticRepository criticRepository;
+    private final GalleryRepository galleryRepository;
 
     public List<PictureDto> findAllPicture() {
         log.info("Найдены все существующие картины в БД");
@@ -41,15 +47,16 @@ public class PictureService {
         return pictureMapper.toListDto(pictures);
     }
 
-    public List<PictureDto> findPictureByGenre( String genre) {
-        log.info("Найдены картины по жанру: " + genre);
-        return pictureRepository.findByGenre(genre);
-    }
+
 
     public void savePicture( PictureDto pictureDto) {
         log.info("Картина сохранена");
         Picture picture = pictureMapper.toEntity(pictureDto);
         picture.setLocalDateTime(LocalDateTime.now());
+        picture.setArtist(artistRepository.findByName(pictureDto.getArtistName()));
+        picture.setGallery(galleryRepository.findByName(pictureDto.getGalleryName()));
+        picture.setCritic(criticRepository.findByName(pictureDto.getCriticName()));
+
         pictureRepository.save(picture);
     }
 

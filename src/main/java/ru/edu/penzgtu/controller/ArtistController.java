@@ -32,7 +32,7 @@ public class ArtistController {
             description = "Позволяет выгрузить всех художников из БД"
     )
     @GetMapping
-    public ResponseWrapper<List<ArtistDto>> findAll() {
+    public ResponseWrapper<List<ArtistDto>> findAllArtists() {
         return baseResponseService.wrapSuccessResponse(artistService.findAllArtist());
     }
 
@@ -42,7 +42,7 @@ public class ArtistController {
             description = "Позволяет выгрузить одного художника по ID из БД"
     )
     @GetMapping("/artist/{id}")
-    public ResponseWrapper<ArtistDto> getById(@PathVariable @Min(0) Long id) {
+    public ResponseWrapper<ArtistDto> getArtistById(@PathVariable @Min(0) Long id) {
         return baseResponseService.wrapSuccessResponse(artistService.findArtistById(id));
     }
     @Operation(
@@ -54,14 +54,6 @@ public class ArtistController {
         return baseResponseService.wrapSuccessResponse(artistService.findArtistByName(name));
     }
 
-    @Operation(
-            summary = "Получение художника по стране",
-            description = "Позволяет выгрузить одного художника по стране из БД"
-    )
-    @GetMapping("/artist/byCountry")
-    public ResponseWrapper<List<ArtistDto>> getArtistByCountry( @RequestParam String country) {
-        return baseResponseService.wrapSuccessResponse(artistService.findByCountry(country));
-    }
 
 
     @Operation(

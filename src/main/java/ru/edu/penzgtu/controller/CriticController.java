@@ -26,7 +26,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Критики", description = "Операции над критиками")
 public class CriticController {
-
     private final CriticService criticService;
     private final BaseResponseService baseResponseService;
 
@@ -36,7 +35,7 @@ public class CriticController {
     )
 
     @GetMapping
-    public ResponseWrapper<List<CriticDto>> findAll(){
+    public ResponseWrapper<List<CriticDto>> findAllCritics(){
         return baseResponseService.wrapSuccessResponse(criticService.findAllCritics());
     }
 
@@ -45,7 +44,7 @@ public class CriticController {
             description = "Позволяет выгрузить одного критика по ID из БД"
     )
     @GetMapping("/critic/{id}")
-    public ResponseWrapper<CriticDto> getById(@PathVariable @Min(0) Long id)  {
+    public ResponseWrapper<CriticDto> getCriticById(@PathVariable @Min(0) Long id)  {
         return baseResponseService.wrapSuccessResponse(criticService.findCriticById(id));
     }
 
@@ -54,18 +53,11 @@ public class CriticController {
             description = "Позволяет найти критика по имени в БД"
     )
     @GetMapping("/critic/byName")
-    public ResponseWrapper<List<CriticDto>> getByName(@RequestParam String name) {
+    public ResponseWrapper<List<CriticDto>> getCriticByName(@RequestParam String name) {
         return baseResponseService.wrapSuccessResponse(criticService.findCriticByName(name));
     }
 
-    @Operation(
-            summary = "Найти критика по региону",
-            description = "Позволяет найти критика по региону в БД"
-    )
-    @GetMapping("/critic/byRegion")
-    public ResponseWrapper<List<CriticDto>> getByRegion(@RequestParam String region) {
-        return baseResponseService.wrapSuccessResponse(criticService.findCriticByRegion(region));
-    }
+
 
     @Operation(
             summary = "Создать критика",

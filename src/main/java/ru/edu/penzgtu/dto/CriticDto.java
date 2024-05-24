@@ -22,7 +22,7 @@ public class CriticDto {
     @NotBlank
     @Pattern(regexp = "^[a-zA-Zа-яА-Я\\s]+$",
             message = "Имя критика может содержать только буквы")
-    @Schema(description = "Имя критика", example = "LenaGolovach")
+    @Schema(description = "Имя критика", example = "Беренсон")
     private String name;
 
     @JsonProperty("age")
@@ -55,50 +55,6 @@ public class CriticDto {
             message = "Количество картин должно быть от 0 до 44")
     @Schema(description = "  Картины которые оценил критик")
     private List<String> pictures;
-
-
-
-    public CriticDto(String name,String region,List<String> pictures) {
-        this.name = name;
-        this.region = region;
-        this.pictures = pictures;
-    }
-    public CriticDto() {
-
-    }
-    public CriticDto(String name) {
-        this.name = name;
-    }
-    public  CriticDto(Long id, String name, String region, List<String> pictures) {
-        this.id = id;
-        this.name = name;
-        this.region = region;
-        this.pictures = pictures;
-    }
-    public  CriticDto(Long id, String name, String region) {
-        this.id = id;
-        this.name = name;
-        this.region = region;
-    }
-    public CriticDto(Long id, String name, Long age,String region,
-                     String specialization, LocalDateTime localDateTime,List<String> pictures) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.pictures = pictures;
-        this.localDateTime = localDateTime;
-        this.specialization = specialization;
-        this.region = region;
-    }
-
-    public  CriticDto(Long id, String name, String region,Long age,String specialization, LocalDateTime localDateTime) {
-        this.id = id;
-        this.name = name;
-        this.region = region;
-        this.age = age;
-        this.specialization = specialization;
-        this.localDateTime = localDateTime;
-    }
 
 
 }

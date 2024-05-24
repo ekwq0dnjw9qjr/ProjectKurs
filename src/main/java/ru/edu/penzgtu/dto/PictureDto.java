@@ -64,25 +64,8 @@ public class PictureDto {
     private String galleryName;
 
     @JsonProperty("critic")
-    @Schema(description = "Критик который оценивают картины", example = "LenaGolovach")
+    @Schema(description = "Критик который оценивают картины", example = "Беренсон")
     private String criticName;
-
-
-
-
-    public  PictureDto(Long id, String name, String technique, String genre,
-                       Long price, LocalDateTime localDateTime) {
-        this.id = id;
-        this.name = name;
-        this.technique = technique;
-        this.genre = genre;
-        this.price = price;
-        this.localDateTime = localDateTime;
-    }
-
-
-
-
 
 
 }

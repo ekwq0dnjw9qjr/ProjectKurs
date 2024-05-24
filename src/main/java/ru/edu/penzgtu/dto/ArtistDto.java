@@ -34,7 +34,7 @@ public class ArtistDto {
     @NotBlank
     @Pattern(regexp = "^[a-zA-Zа-яА-Я\\s]+$",
             message = "Страна художника может содержать только буквы и пробелы")
-    @Schema(description = "Страна художника",example = "Германия")
+    @Schema(description = "Страна художника",example = "Голландия")
     private String country;
 
 
@@ -47,8 +47,7 @@ public class ArtistDto {
     @JsonProperty("quote")
     @NotBlank
     @Schema(description = "Цитата художника",
-            example = "Перед лицом великой цели никакие жертвы не покажутся " +
-            "слишком большими")
+            example = "Одиночество достаточно большое несчастье, нечто вроде тюрьмы.")
     private String quote;
 
     @JsonProperty("dateAndTime")
@@ -61,53 +60,6 @@ public class ArtistDto {
             message = "Количество названий картин должно быть от 0 до 44")
     @Schema(description = "Названия картин художника")
     private List<String>    pictures;
-
-
-
-
-    public ArtistDto(String name,String country,List<String> pictures) {
-        this.name = name;
-        this.country = country;
-        this.pictures = pictures;
-    }
-    public ArtistDto() {
-
-    }
-    public ArtistDto(String name) {
-        this.name = name;
-    }
-    public  ArtistDto(Long id, String name, String country, List<String> pictures) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.pictures = pictures;
-    }
-    public  ArtistDto(Long id, String name, String country) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-    }
-    public ArtistDto(Long id, String name, String country,String style,String quote,
-                     LocalDateTime localDateTime,List<String> pictures) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.pictures = pictures;
-        this.localDateTime = localDateTime;
-        this.style = style;
-        this.quote = quote;
-    }
-
-    public ArtistDto(Long id, String name, String country,String style,String quote,
-                     LocalDateTime localDateTime) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.localDateTime = localDateTime;
-        this.style = style;
-        this.quote = quote;
-    }
-
 
 
 }

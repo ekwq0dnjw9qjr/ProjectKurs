@@ -21,10 +21,7 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
 
 
-    @Query("SELECT new ru.edu.penzgtu.dto.ArtistDto(a.id, a.name, a.country,a.style,a.quote,a.localDateTime) " +
-            "FROM Artist a " +
-            "WHERE a.country = ?1")
-    List<ArtistDto> findByCountry(String country);
+
 
 
 

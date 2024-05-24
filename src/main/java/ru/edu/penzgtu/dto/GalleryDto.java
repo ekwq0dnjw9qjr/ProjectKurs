@@ -25,7 +25,6 @@ public class GalleryDto {
     private Long id;
 
 
-
     @JsonProperty("name")
     @Schema(description = "Название галери в БД", example = "Музей Ван Гога")
     @NotBlank
@@ -71,48 +70,7 @@ public class GalleryDto {
     @Size(min = 0,max = 72, message = "Количество  картин в галереи должно быть от 0 до 44")
     private List<String> pictures;
 
-    public GalleryDto(String name,String country,List<String> pictures) {
-        this.name = name;
-        this.country = country;
-        this.pictures = pictures;
-    }
-    public GalleryDto() {
 
-    }
-    public GalleryDto(String name) {
-        this.name = name;
-    }
-    public  GalleryDto(Long id, String name, String country, List<String> pictures) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.pictures = pictures;
-    }
-    public  GalleryDto(Long id, String name, String country) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-    }
-    public GalleryDto(Long id, String name, String country,String city,
-                     String street, LocalDateTime localDateTime,List<String> pictures) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.pictures = pictures;
-        this.localDateTime = localDateTime;
-        this.city = city;
-        this.street = street;
-    }
-
-    public  GalleryDto(Long id, String name, String country, String city,
-                       String street, LocalDateTime localDateTime) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.localDateTime = localDateTime;
-    }
 
 
 }

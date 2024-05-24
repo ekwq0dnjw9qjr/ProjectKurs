@@ -7,10 +7,12 @@ import ru.edu.penzgtu.dto.GalleryDto;
 import ru.edu.penzgtu.exception.ErrorType;
 import ru.edu.penzgtu.exception.PenzGtuException;
 import ru.edu.penzgtu.repo.GalleryRepository;
+import ru.edu.penzgtu.repo.PictureRepository;
 import ru.edu.penzgtu.service.mapper.GalleryMapper;
 import ru.edu.penzgtu.entity.Gallery;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -19,6 +21,7 @@ import java.util.List;
 public class GalleryService {
     private final GalleryRepository galleryRepository;
     private final GalleryMapper galleryMapper;
+    private final PictureRepository pictureRepository;
 
 
     public List<GalleryDto> findAllGalleries() {
@@ -42,16 +45,15 @@ public class GalleryService {
     }
 
 
-    public List<GalleryDto> findGalleryByCity(String city) {
-        log.info("Найдены галереи по городу: " + city);
-        return galleryRepository.findByCity(city);
-    }
+
 
 
     public void  saveGallery (GalleryDto galleryDto) {
         log.info("Галерея сохранена");
         Gallery gallery = galleryMapper.toEntity(galleryDto);
         gallery.setLocalDateTime(LocalDateTime.now());
+        gallery.setPictures((Collections.singletonList
+                (pictureRepository.findByName(String.valueOf(galleryDto.getPictures().stream().toList())))));
         galleryRepository.save(gallery);
     }
 

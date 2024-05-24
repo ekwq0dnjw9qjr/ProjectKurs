@@ -46,18 +46,11 @@ public class PictureController {
             description = "Позволяет найти картину по названию в БД"
     )
     @GetMapping("/picture/byName")
-    public ResponseWrapper<List<PictureDto>> getByName(@RequestParam @Valid String name) {
+    public ResponseWrapper<List<PictureDto>> getPictureByName(@RequestParam @Valid String name) {
         return baseResponseService.wrapSuccessResponse(pictureService.findPictureByName(name));
     }
 
-    @Operation(
-            summary = "Получение картины по жанру",
-            description = "Позволяет найти картину по жанру в БД"
-    )
-    @GetMapping("/picture/byGenre")
-    public ResponseWrapper<List<PictureDto>> getByGenre(@RequestParam @Valid String genre) {
-        return baseResponseService.wrapSuccessResponse(pictureService.findPictureByGenre(genre));
-    }
+
 
     @Operation(
             summary = "Создать картину",

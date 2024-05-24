@@ -18,6 +18,5 @@ public interface GalleryRepository extends JpaRepository<Gallery, Long> {
 
     List<Gallery> findGalleryByName(String name);
 
-    @Query("SELECT new ru.edu.penzgtu.dto.GalleryDto(g.id, g.name, g.country,g.city,g.street,g.localDateTime) FROM Gallery g WHERE g.city = ?1")
-    List<GalleryDto> findByCity(String city);
+
 }

@@ -8,9 +8,11 @@ import ru.edu.penzgtu.entity.Critic;
 import ru.edu.penzgtu.exception.ErrorType;
 import ru.edu.penzgtu.exception.PenzGtuException;
 import ru.edu.penzgtu.repo.CriticRepository;
+import ru.edu.penzgtu.repo.PictureRepository;
 import ru.edu.penzgtu.service.mapper.CriticMapper;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 @Service
 @Slf4j
@@ -18,6 +20,7 @@ import java.util.List;
 public class CriticService {
     private final CriticRepository criticRepository;
     private final CriticMapper criticMapper;
+    private final PictureRepository pictureRepository;
 
     public List<CriticDto> findAllCritics(){
         log.info("Найдены все существующие критики в БД");
@@ -40,16 +43,14 @@ public class CriticService {
     }
 
 
-    public List<CriticDto> findCriticByRegion(String region) {
-        log.info("Найдены критики по региону: " + region);
-        return criticRepository.findByRegion(region);
-    }
 
 
     public void saveCritic(CriticDto criticDto){
         log.info("Критик сохранен");
         Critic critic = criticMapper.toEntity(criticDto);
         critic.setLocalDateTime(LocalDateTime.now());
+        critic.setPictures((Collections.singletonList
+                (pictureRepository.findByName(String.valueOf(criticDto.getPictures().stream().toList())))));
         criticRepository.save(critic);
     }
 
